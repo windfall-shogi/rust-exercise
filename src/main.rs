@@ -1,4 +1,8 @@
 use std::fmt;
+use rand::Rng;
+
+extern crate tch;
+use tch::Tensor;
 
 struct Point {
     x: i32,
@@ -48,13 +52,20 @@ fn main() {
 
     let color = Color::Red;
     println!("enum: {}", color);
+    let arr = [Color::Red, Color::Green, Color::Blue];
+    // 乱数
+    let mut rng = rand::thread_rng();
+    let i: usize = rng.gen_range(0..3);
+    println!("random: {}", arr[i]);
 
     let mut name0: &str = "Yamada";
+    println!("{}", name0);
     name0 = "Tanaka";
     println!("{}", name0);
 
     // 文字列を初期化する
     let mut name1 = String::from("Yamada");
+    println!("{}", name1);
     // 別の文字列を設定する
     name1 = "Tanaka".to_string();
     // 文字列に追加する
@@ -76,4 +87,9 @@ fn main() {
     for i in 0..3 {
         println!("for loop: {}", i);
     }
+
+    println!("torch");
+    let t = Tensor::of_slice(&[3, 1, 4, 1, 5]);
+    let t = t * 2;
+    t.print();
 }
